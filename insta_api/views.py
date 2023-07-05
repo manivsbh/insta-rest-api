@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from insta_api import serializers
 from rest_framework import viewsets
+from insta_api import models
+from rest_framework.authentication import TokenAuthentication
+from insta_api import permissions
 
 
 
@@ -92,3 +95,11 @@ class HelloViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         """Handle removing an Object"""
         return Response({'http_method':'Delete'})
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating and updating profiles"""
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfiles.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
