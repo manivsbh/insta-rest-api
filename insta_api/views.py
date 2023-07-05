@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from insta_api import models
 from rest_framework.authentication import TokenAuthentication
 from insta_api import permissions
+from rest_framework import filters
 
 
 
@@ -103,3 +104,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfiles.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email')
