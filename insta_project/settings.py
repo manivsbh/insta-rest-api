@@ -123,3 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'insta_api.UserProfiles'
+
+
+STATIC_ROOT = 'static/'
